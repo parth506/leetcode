@@ -18,6 +18,39 @@ int main(){
     vector<int> a(n);
     vector<int> dp(n,-1);
     dp[0]=0;
-    cout<<f(n,a,dp)<<endl;
+    cout<<f(n-1,a,dp)<<endl;
+
+}
+
+//Tabulation
+int main(){
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    vector<int> dp(n,-1);
+    dp[0]=a[0];
+    for(int i=1 ;i <n ;++i){
+        int take = a[i];if(i>1) take+=dp[i-2];
+        int non_take= 0+dp[i-1];
+        dp[i]=max(take,non_take);
+    }
+    cout<<dp[n-1]<<endl;
+}
+
+//Space Optimisation
+int main(){
+   int n;
+    cin>>n;
+    vector<int> a(n);
+    int prev=a[0];
+    int prev2=0;
+    for(int i=1 ;i <n ;++i){
+        int take = a[i];if(i>1) take+=prev2;
+        int non_take= 0+prev;
+        int curr=max(take,non_take);
+        prev2=prev;
+        prev=curr;
+    }
+    cout<<prev<<endl;
 
 }
