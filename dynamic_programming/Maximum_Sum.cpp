@@ -38,6 +38,7 @@ int main(){
 }
 
 //Space Optimisation
+//Best Approach
 int main(){
    int n;
     cin>>n;
