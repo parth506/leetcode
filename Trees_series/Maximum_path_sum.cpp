@@ -16,6 +16,7 @@ class Solution
 {
 
 public:
+    int maxi = INT_MIN;
     int maxPathSum(TreeNode *root, int maxi)
     {
         if (root == nullptr)
