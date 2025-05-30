@@ -35,13 +35,31 @@ public:
         vector<vector<int>> ans;
         queue<TreeNode *> q;
         q.push(root);
+        int counter = 0;
         if (root == nullptr)
             return ans.size();
         while (!q.empty())
         {
             int size = q.size();
-            for (int i = 0;)
+            vector<int> level;
+            for (int i = 0; i < size; ++i)
+            {
+                TreeNode *node = q.front();
+                q.pop();
+                if (node->left != nullptr)
+                {
+                    q.push(node->left);
+                }
+                if (node->right != nullptr)
+                {
+                    q.push(node->right);
+                }
+                level.push_back(node->val);
+            }
+            ans.push_back(level);
+            ++counter;
         }
+        return counter;
     }
 };
 
