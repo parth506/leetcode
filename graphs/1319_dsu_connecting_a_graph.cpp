@@ -2,11 +2,11 @@
 
 class DisjointSet
 {
+
+public:
     vector<int> rank;
     vector<int> parent;
     vector<int> size;
-
-public:
     DisjointSet(int n)
     {
         rank.resize(n + 1, 0);
@@ -64,5 +64,34 @@ public:
             parent[pu] = pv;
             size[pv] += size[pu];
         }
+    }
+};
+
+class Solution
+{
+public:
+    int makeConnected(int n, vector<vector<int>> &connections)
+    {
+        DisjointSet ds(n);
+        int extra = 0;
+        for (auto it : connections)
+        {
+            int u = it[0];
+            int v = it[1];
+            if (ds.findUPar(u) == ds.findUPar(v))
+                ++extra;
+            else
+                ds.unionBySize(u, v);
+        }
+        int cn = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            if (ds.parent[i] == i)
+                ++cn;
+        }
+
+        if (extra >= cn - 1)
+            return cn - 1;
+        return -1;
     }
 };
